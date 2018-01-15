@@ -1,0 +1,44 @@
+extends ../../layouts/default
+
+block content
+	.container
+		.panel
+			.panel-primary
+				- var truck = data.truck
+				.panel-heading Manifest Details: #{truck.name}
+				.panel-body
+					p #{truck.description}
+
+					ul.truck-meta
+						li Price 
+							label $#{truck.price}
+						li Date 
+							abbr.last-updated #{truck.createdAt}
+					label Tags:
+					br
+					each tag in truck.tags
+						.label.label-info.pull-left #{tag.name}
+					br
+					br
+					table.table.table-striped.items
+						tr
+							th SKU
+							th Name
+							th qty
+							th price
+							th tags
+						each item in truck.items
+							tr
+								td
+									p #{item.retailId}
+								td
+									p #{item.name}
+								td
+									p #{item.quantity}
+								td
+									p #{item.price}
+								td
+									p #{item.tags}
+								
+
+					

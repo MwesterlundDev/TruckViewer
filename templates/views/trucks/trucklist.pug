@@ -1,0 +1,45 @@
+extends ../../layouts/default
+
+block content
+	.container
+		.panel
+			.panel-primary
+				.panel-heading Trucks
+				.panel-body
+					p These are the list of trucks in the availibe this week
+				
+				table.table.table-striped
+					each truck in data.trucks.results
+						tr
+							td
+								a(href=''+truck.url) #{truck.name.toUpperCase()}
+								p Description: #{truck.description}
+								ul.ticket-meta
+									li Price 
+										label $#{truck.price}
+									li Date 
+										abbr.last-updated #{truck.createdAt}
+								
+								each tag in truck.tags
+									.label.label-info.pull-right #{tag.name}
+			.panel-footer
+				-// create a mixin for pagination (probably will be common)
+				ul.pagination
+					if data.trucks.totalPages > 1
+						if data.trucks.previous
+							li 
+								a.page-num(href='?page='+data.trucks.previous) Previous
+						else
+							li
+								a.page-num(href='?page=1') Previous
+			
+						
+						if data.trucks.next
+							li 
+								a.page-num(href='?page='+data.trucks.next) Next
+						else
+							li
+								a.page-num(href='?page='+data.trucks.totalPages) Next
+
+	script.
+		console.log("Hello")
